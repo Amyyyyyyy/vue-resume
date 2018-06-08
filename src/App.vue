@@ -37,17 +37,35 @@ export default {
   flex-direction: column;
 }
 .topbar{
-  background: red;
+  box-shadow: 0 0 3px hsla(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 main{
-  background: green;
+  background: #dddddd;;
   display: flex;
   flex: 1;
-  > .editor{
-    width: 20em;
+  .editor{
+    width: 40em;
+    margin: 16px 8px 16px 16px;
+    background: white;
+    box-shadow: 0 0 3px hsla(0, 0, 0, 0.5);
+    border-radius: 2px;
+    overflow: hidden;
   }
-  > .preview{
+  .preview{
     flex: 1;
+    margin: 16px 16px 16px 8px;
+    background: white;
+    box-shadow: 0 0 3px hsla(0, 0, 0, 0.5);
+    border-radius: 2px;
+
   }
 }
 </style>
