@@ -2,8 +2,20 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import 'normalize.css'
+import './assets/reset.scss'
 
 Vue.config.productionTip = false
+
+// 全局注册组件
+Vue.component('Amy', {
+  template: '<p> i am amy </p>',
+  data(){
+    return{name: 'Amy Lee'}; 
+  }
+})
+import HelloWorld from './components/HelloWorld';
+Vue.component('HelloWorld',HelloWorld);   
 
 /* eslint-disable no-new */
 new Vue({
