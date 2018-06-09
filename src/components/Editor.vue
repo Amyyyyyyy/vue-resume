@@ -14,28 +14,71 @@
             </ol>
         </nav>
         <ol class="panes">
-            <li v-for="i in [0,1,2,3,4,5]"
-                v-bind:key=i
-                v-bind:class = "{active: currentTab === i}"
-            >
-                tab{{i}}
+            <li v-bind:class= "{active: currentTab === 0}">
+                <ProfileEditor v-bind:profile = "profile" />
             </li>
-           
+            <li v-bind:class= "{active: currentTab === 1}">
+                <WorkHistoryEditor v-bind:workHistory="workHistory" />
+            </li>
+            <li v-bind:class= "{active: currentTab === 2}">
+                 <h2>个人信息</h2>
+
+            </li>
+            <li v-bind:class= "{active: currentTab === 3}">
+                <h2></h2>
+
+            </li>
+            <li v-bind:class= "{active: currentTab === 4}">
+                <h2>获奖情况</h2>
+
+            </li>
+            <li v-bind:class= "{active: currentTab === 5}">
+                <h2>联系方式</h2>
+
+            </li>
         </ol>
     </div>
 </template>
 
 <script>
+import ProfileEditor from './ProfileEditor';
+import WorkHistoryEditor from './WorkHistoryEditor';
 export default {
+    components:{
+        ProfileEditor,WorkHistoryEditor
+    }, 
     data(){
         return {
             currentTab: 0,
-            icons: ['shenfenzheng','work','book','aixin','trophy','weibiaoti-']
+            icons: ['shenfenzheng','work','book','aixin','trophy','weibiaoti-'],
+            profile: {
+                name:'',
+                city:'',
+                birth:''
+            },
+            workHistory: [
+                {
+                    company:'',
+                    content:''
+                }
+            ]
+        }
+    },
+    methods:{
+        onSubmit(){
+            console.log(this.profile)
+        },
+        addWorkHistory(){
+            this.workHistory.push({
+                company:"",content:""
+            })
+        },
+        removeWorkHistory(index){
+            this.workHistory.splice(index,1);
         }
     }
 }
 </script>
-
 
 
 <style lang="scss">
@@ -62,12 +105,24 @@ export default {
     }
   }
   > .panes{
-      > li {
-          display: none;
-          &.active{
-              display: block;
-          }
-      }
+        overflow: auto;
+        width: 100%;
+        .container{
+            position: relative;
+            .el-icon-close{
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+        }
+        > li {
+            padding: 24px;
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
   }
 }
 </style>
