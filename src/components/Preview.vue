@@ -2,6 +2,7 @@
     <div id='previe'>
         我是previe
     </div>
+
 </template>
 
 <style>
@@ -9,3 +10,10 @@
         min-height: 100px;
     }
 </style>
+
+<script>
+export default {
+    props:['profile','workHistory','studyHistory','awards','contacts','projects']
+}
+</script>
+
