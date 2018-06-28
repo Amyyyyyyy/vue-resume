@@ -1,12 +1,13 @@
 // 单文件组件
 
 <template>
-  <div id="app">
-    <Topbar class="topbar"/>
+  <div id="app" v-bind:class="{previewMode:previewMode}">
+    <Topbar class="topbar" v-on:preview="preview"/>
     <main>
-    <Editor class="editor"/>
-    <Preview class="preview"/>
+      <Editor v-bind:resume="resume" class="editor"/>
+      <Preview v-bind:resume="resume" class="preview"/>
     </main>
+    <el-button id="exitPreview" v-on:click="exitPreview">退出</el-button>
   </div>
 </template>
 
@@ -17,10 +18,36 @@ import Preview from './components/Preview'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      previewMode:false,
+      resume:{
+        profile: { name: "", city: "", birth: "" },
+        workHistory: [{ company: "", content: "" }],
+        studyHistory: [{ school: "", duration: "", degree: "" }],
+        projects: [{ name: "", content: "" }],
+        awards: [{ name: "" }],
+        contacts: [{QQ:'',wechat:'',email:'',tel:''}]
+      }
+    }
+  },
   components: {
     // HelloWorld,
     // "Lee":Lee
     Topbar,Editor,Preview
+  },
+  // created(){
+  //   this.$on('preview',()=>{
+  //     alert("1111");
+  //   })
+  // }
+  methods:{
+    preview(){
+      this.previewMode = true;
+    },
+    exitPreview(){
+      this.previewMode = false;
+    }
   }
 }
 </script>
@@ -67,5 +94,23 @@ main{
     border-radius: 2px;
 
   }
+}
+.previewMode > #topbar{
+    display: none;
+}
+.previewMode #editor{
+  display: none;
+}
+.previewMode .preview{
+  max-width: 800px;
+  margin: 32px auto;
+}
+#exitPreview{
+  display: none;
+}
+.previewMode #exitPreview{
+  display: block;
+
+
 }
 </style>
